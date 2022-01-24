@@ -1,3 +1,4 @@
+@using System.Collections.Generic;
 
 <h1>Game board goes here</h1>
 
@@ -14,11 +15,15 @@
 </style>
 
 <div class="container">
-@foreach(var piece in Pieces)
-{
-    var classname=$"r{piece.Location.Row}c{piece.Location.Column}";
-    <div class=@classname>
-        <GamePiece Piece=@piece />
-    </div>
-}
+    @foreach (var piece in Pieces)
+    {
+        var classname = $"r{piece.Location.Row}c{piece.Location.Column}";
+        var componentTypeName = "interfacedemo.Shared."+piece.GetType().Name + "Component";
+        var componentType = Type.GetType(componentTypeName);
+        Dictionary<string,object> parameters = new() {{"Piece", piece}};
+
+        <div class=@classname>
+            <DynamicComponent Type=@componentType Parameters=@parameters />
+        </div>
+    }
 </div>

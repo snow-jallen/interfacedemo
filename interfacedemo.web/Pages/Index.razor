@@ -2,23 +2,32 @@
 @using logic
 
 <PageTitle>Interface Demo</PageTitle>
-
-<Board Pieces=@pieces/>
+<EditForm Model=@this>
+    Rows:
+    <InputNumber @bind-Value="Rows" aria-placeholder="Rows" style="width: 80px;" />
+    Columns:
+    <InputNumber @bind-Value="Columns" aria-placeholder="Columns" style="width: 80px;" />
+</EditForm>
+<Board Pieces=@pieces Rows=@Rows Columns=@Columns/>
 <Button @onclick="movePiece">Move Piece</Button>
 
 @code 
 {
     IList<IGamePiece> pieces;
+    int Rows=5;
+    int Columns=5;
 
     protected override void OnInitialized()
     {
-        pieces = new[]
+        pieces = new IGamePiece[]
         {
             new Player("Player1", "😐", 50, new Location(0,0)),
-            new Player("Player2", "😐", 50, new Location(1,1)),
-            new Player("Player3", "😐", 50, new Location(2,2)),
-            new Player("Player4", "😐", 50, new Location(4,0)),
-            new Player("Player5", "😐", 50, new Location(2,4)),
+            new Player("Player2", "🤪", 50, new Location(1,1)),
+            new Player("Player3", "😎", 50, new Location(2,2)),
+            new Player("Player4", "🤩", 50, new Location(4,0)),
+            new Player("Player5", "🤨", 50, new Location(2,4)),
+            new Structure("HomeBase", "🏡", 250, new Location(3,3)),
+            new Structure("Office", "🏢", 1000, new Location(0,3))
         };
     }
 

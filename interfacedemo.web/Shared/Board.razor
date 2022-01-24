@@ -1,0 +1,24 @@
+
+<h1>Game board goes here</h1>
+
+<style>
+    .container {
+        display: grid;
+        grid-template-columns: @gridTemplateColumns;
+        grid-template-rows: @gridTemplateRows;
+        gap: 0px 0px;
+        grid-template-areas: @gridTemplateAreas()
+    }
+
+    @cellClasses()
+</style>
+
+<div class="container">
+@foreach(var piece in Pieces)
+{
+    var classname=$"r{piece.Location.Row}c{piece.Location.Column}";
+    <div class=@classname>
+        <GamePiece Piece=@piece />
+    </div>
+}
+</div>
